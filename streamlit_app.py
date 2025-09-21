@@ -119,11 +119,3 @@ if st.button("Engineer Prompt", help="Click to get a professional prompt."):
     else:
         st.warning("Please enter a prompt to engineer.")
 
-st.markdown("---")
-st.markdown("### How It Works")
-st.markdown(
-    """
-This app uses the DeepSeek API to apply a detailed prompt engineering framework (the 4C's) to your vague input,
-making up realistic details to create a powerful, professional prompt.
-"""
-)
