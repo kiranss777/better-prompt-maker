@@ -96,8 +96,8 @@ def refine_prompt_core(user_prompt: str):
         return None
 
 # --- UI Components ---
-st.title("💡 AI Prompt Engineer")
-st.markdown("Enter a simple, vague prompt below, and our AI will transform it into a professional, well-rounded prompt.")
+st.title("💡 AI Prompt Engineer🤖")
+st.markdown("Enter a simple, vague prompt below, and I will make it less shitty and do the prompt engineering for you!💪")
 
 user_prompt = st.text_area(
     "Your Basic Prompt", 
@@ -105,17 +105,42 @@ user_prompt = st.text_area(
     placeholder="e.g., write a report about renewable energy"
 )
 
+import time
+
 if st.button("Engineer Prompt", help="Click to get a professional prompt."):
     if user_prompt:
-        with st.spinner("Engineering your prompt..."):
+        # Sequential loading messages
+        loading_steps = [
+            "Analyzing your prompt...🧐",
+            "Making it less shitty💩",
+            "Applying the 4C's framework...😇",
+            "Adding context and constraints...",
+            "Structuring content goals...🤡",
+            "Adding verification checks...",
+            "You should be able to do this on your own!🥱",
+            "Finalizing engineered prompt..."
+        ]
+        
+        # Create a placeholder for dynamic updates
+        status_placeholder = st.empty()
+        
+        # Display each step sequentially
+        for i, message in enumerate(loading_steps):
+            status_placeholder.info(f"Step {i+1}/{len(loading_steps)}: {message}")
+            time.sleep(0.8)  # Adjust timing as needed
+        
+        # Clear the status and show spinner for final processing
+        status_placeholder.empty()
+        
+        with st.spinner("Generating final result..."):
             refined_prompt = refine_prompt_core(user_prompt)
 
-            if refined_prompt:
-                st.success("Prompt Refined Successfully!")
-                st.subheader("Final Engineered Prompt:")
-                st.code(refined_prompt, language="text")
-            else:
-                st.error("Error: Could not retrieve a refined prompt. Please check your API key and try again.")
+        if refined_prompt:
+            st.success("Prompt Refined Successfully!💪")
+            st.subheader("Final Engineered Prompt:")
+            st.code(refined_prompt, language="text")
+        else:
+            st.error("Error: Could not retrieve a refined prompt. IG the we ran out of credits (womp womp🤑 🤑 🤑 🤑 )")
     else:
-        st.warning("Please enter a prompt to engineer.")
+        st.warning("Please enter a prompt to engineer👺")
 
