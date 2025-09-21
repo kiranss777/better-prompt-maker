@@ -124,16 +124,16 @@ if st.button("Engineer Prompt", help="Click to get a professional prompt."):
         # Create a placeholder for dynamic updates
         status_placeholder = st.empty()
         
-        # Display each step sequentially
-        for i, message in enumerate(loading_steps):
-            status_placeholder.info(f"Step {i+1}/{len(loading_steps)}: {message}")
-            time.sleep(0.8)  # Adjust timing as needed
+        # Display each step sequentially while processing
+        for message in loading_steps:
+            status_placeholder.info(message)
+            time.sleep(0.8)
+            
+        # Process the actual prompt during the loading sequence
+        refined_prompt = refine_prompt_core(user_prompt)
         
-        # Clear the status and show spinner for final processing
+        # Clear the status after processing
         status_placeholder.empty()
-        
-        with st.spinner("Generating final result..."):
-            refined_prompt = refine_prompt_core(user_prompt)
 
         if refined_prompt:
             st.success("Prompt Refined Successfully!💪")
